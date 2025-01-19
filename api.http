@@ -1,0 +1,54 @@
+@base_url=http://localhost:9802
+
+
+### *Create Foundation
+POST {{base_url}}/foundation
+Content-Type: application/json
+
+{
+  "id": "01H7YB3N4J",
+  "name": "Happy Paws Foundation",
+  "location": "Medellín, Colombia"
+}
+
+### *Get Pets by Foundation
+# filters: type, breed, name
+@type=Dog
+@breed=Labrador
+@name=Buddy
+@foundationId=01JHXSS8CC2P86X8YSM8YW66VS
+# GET {{base_url}}/foundation/{{foundationId}}/pets?type_={{type}}&breed={{breed}}&name={{name}}
+# todo: fix type error
+GET {{base_url}}/foundation/{{foundationId}}/pets
+
+### *Create Pet
+POST {{base_url}}/pet
+Content-Type: application/json
+
+{
+  "foundationId": "01JHXSS8CC2P86X8YSM8YW66VS",
+  "name": "Pancracio",
+  "type": "Dog",
+  "breed": "Pincher",
+  "status": "Available"
+}
+
+### *Get Pet by ID
+@petId=01JHXWW0B9XJQHJEMM9NREJ66E
+GET {{base_url}}/pet/{{petId}}
+#todo: implement GSI to get pet by id
+
+### *Update Pet
+PUT {{base_url}}/pet/{{foundationId}}/{{petId}}
+Content-Type: application/json
+
+{
+  "name": "Pancracio",
+  "type": "Dog",
+  "breed": "Chiuhuahua",
+  "status": "Adopted"
+}
+
+### *Delete Pet
+DELETE {{base_url}}/pet/{{foundationId}}/{{petId}}
+

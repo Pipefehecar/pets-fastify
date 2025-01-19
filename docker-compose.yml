@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566" # Puerto principal para la API de LocalStack
+      - "8000:8000" # Puerto específico para DynamoDB
+    environment:
+      - SERVICES=dynamodb
+      - DEBUG=1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "./localstack:/var/lib/localstack"
+      - ./init-dynamodb.sh:/etc/localstack/init/ready.d/script.sh
